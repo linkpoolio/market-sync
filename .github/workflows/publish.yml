@@ -1,4 +1,4 @@
-name: Docker
+name: Publish
 on:
   push:
     branches:
@@ -7,7 +7,7 @@ on:
       - v*
 
 jobs:
-  build-and-publish:
+  docker:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -18,3 +18,14 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           tag_names: true
+  go-releaser:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@v1
+        with:
+          version: latest
+          args: release --rm-dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

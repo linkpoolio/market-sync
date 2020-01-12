@@ -9,8 +9,8 @@ builds:
   goarch:
     - amd64
     - arm64
-archive:
-  replacements:
+archives:
+- replacements:
     amd64: x86_64
   format_overrides:
     - goos: windows
