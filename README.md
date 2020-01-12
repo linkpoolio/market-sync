@@ -21,6 +21,7 @@ API keys.
 
 ### Preconditions
 
+- API key pair created on the Market, documentation found [here](https://docs.linkpool.io/docs/market_api_keys).
 - `ORACLE_CONTRACT_ADDRESS` configuration variable is set in Chainlink.
 - Chainlink node is already created within the Market.
 
