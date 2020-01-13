@@ -5,6 +5,8 @@ Synchronise job specifications from any given Chainlink node to the [LinkPool Ma
 - Ability to specify job name's and cost before added in the Market.
 - Edit any job specification within the CLI to remove any secrets such as API keys.
 
+**Important:** This tool will not sync a job unless it is confirmed first, at the risk of uploading secrets. Ensure that you edit your job specifications when prompted by the CLI if they contain sensitive information such as API keys.
+
 ## Install
 
 Download the latest version from [releases](https://github.com/linkpoolio/market-sync/releases).
