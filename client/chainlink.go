@@ -108,10 +108,15 @@ func (c *Chainlink) setSessionCookie() error {
 	if err != nil {
 		return err
 	}
-	if len(resp.Cookies()) == 0 {
-		return fmt.Errorf("chainlink: no cookie was returned after getting a session")
+	for _, cookie := range resp.Cookies() {
+		if cookie.Name == "clsession" {
+			c.cookie = cookie
+			break
+		}
 	}
-	c.cookie = resp.Cookies()[0]
+	if c.cookie == nil {
+		return fmt.Errorf("chainlink: session cookie wasn't returned on login")
+	}
 	return nil
 }
 
