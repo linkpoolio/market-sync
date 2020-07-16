@@ -97,7 +97,7 @@ func (m *Market) JobExists(jobNodeId string, networkId int) (bool, error) {
 	return true, nil
 }
 
-func (m *Market) NodeByOracleAddress(oracle common.Address, networkId int) (*MarketNode, error) {
+func (m *Market) NodeByOracleAddress(oracle *common.Address, networkId int) (*MarketNode, error) {
 	n := &MarketNodePage{}
 	_, err := m.do(
 		http.MethodGet,
