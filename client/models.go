@@ -64,7 +64,7 @@ type ChainlinkJobSpec struct {
 	NodeID     *uuid.UUID                 `json:"nodeId,omitempty"`
 	Attributes ChainlinkJobSpecAttributes `json:"attributes"`
 	MinPayment string                     `json:"minPayment,omitempty"`
-	Initiators []*ChainlinkInitiator 	  `json:"initiators,omitempty"`
+	Initiators []*ChainlinkInitiator      `json:"initiators,omitempty"`
 	Tasks      []*ChainlinkTaskSpec       `json:"tasks,omitempty"`
 }
 
@@ -121,9 +121,9 @@ type MarketCreated struct {
 }
 
 type MarketError struct {
-	Error string `json:"error"`
-	Code  int    `json:"code"`
-	InputErrors []struct{
+	Error       string `json:"error"`
+	Code        int    `json:"code"`
+	InputErrors []struct {
 		Field string `json:"field"`
 		Error string `json:"error"`
 	} `json:"inputErrors"`

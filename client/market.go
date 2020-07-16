@@ -81,7 +81,7 @@ func (m *Market) JobExists(jobNodeId string, networkId int) (bool, error) {
 	_, err := m.do(
 		http.MethodGet,
 		fmt.Sprintf(
-			"/jobs?nodeJobId=%s&networkId=%d",
+			"/jobs?nodeJobId[]=%s&networkId=%d",
 			strings.Replace(jobNodeId, "-", "", -1),
 			networkId,
 		),
