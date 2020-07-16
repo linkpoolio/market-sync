@@ -56,16 +56,19 @@ func NewApplication(config *Config) (*Application, error) {
 func (a *Application) MarketNode() (*client.MarketNode, error) {
 	yellow := color.New(color.FgYellow).SprintFunc()
 
+	oracleNilError := errors.New("Chainlink oracle address is nil, please ensure `ORACLE_CONTRACT_ADDRESS` is set in configuration")
 	cfg, err := a.chainlink.Config()
 	if err != nil {
-		exit(err)
+		return nil, err
+	} else if cfg.Data.Attributes.OracleContractAddress == nil {
+		return nil, oracleNilError
 	}
 	oracle := cfg.Data.Attributes.OracleContractAddress
 	chainId := cfg.Data.Attributes.ETHChainID
 
 	fmt.Printf("%s %s\n", yellow("Oracle Address:"), oracle.String())
 	if oracle.String() == common.HexToAddress("0x0").String() {
-		return nil, errors.New("Chainlink oracle address is nil, please ensure `ORACLE_CONTRACT_ADDRESS` is set in configuration")
+		return nil, oracleNilError
 	}
 
 	node, err := a.market.NodeByOracleAddress(oracle, chainId)

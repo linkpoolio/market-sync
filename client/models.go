@@ -91,8 +91,8 @@ type ChainlinkJobSpecCreated struct {
 type ChainlinkConfig struct {
 	Data struct {
 		Attributes struct {
-			OracleContractAddress common.Address `json:"oracleContractAddress"`
-			ETHChainID            int            `json:"ethChainId"`
+			OracleContractAddress *common.Address `json:"oracleContractAddress"`
+			ETHChainID            int             `json:"ethChainId"`
 		} `json:"attributes"`
 	} `json:"data"`
 }
