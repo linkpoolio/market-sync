@@ -8,7 +8,6 @@ builds:
     - linux
   goarch:
     - amd64
-    - arm64
 archives:
 - replacements:
     amd64: x86_64
