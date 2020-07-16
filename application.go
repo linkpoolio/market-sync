@@ -112,9 +112,9 @@ func (a *Application) SyncJobSpecs(nodeId uuid.UUID, networkId int) error {
 func (a *Application) promptJobSpec(spec *client.ChainlinkJobSpec) {
 	a.outputJSON(spec)
 	if answer, err := a.config.UI.Ask("Sync this job spec to the Market? [y/n]", &input.Options{
-		Default:  "n",
-		Loop:     true,
-		Required: true,
+		Default:      "n",
+		Loop:         true,
+		Required:     true,
 		ValidateFunc: booleanInputValidation,
 	}); err != nil {
 		exit(err)
@@ -157,16 +157,16 @@ func (a *Application) promptJobCost() string {
 	}); err != nil {
 		exit(err)
 	} else {
-		 return answer
+		return answer
 	}
 	return ""
 }
 
 func (a *Application) promptRetry(spec *client.ChainlinkJobSpec) {
 	if answer, err := a.config.UI.Ask("Retry adding this job? [y/n]", &input.Options{
-		Default:  "n",
-		Loop:     true,
-		Required: true,
+		Default:      "n",
+		Loop:         true,
+		Required:     true,
 		ValidateFunc: booleanInputValidation,
 	}); err != nil {
 		return
@@ -177,9 +177,9 @@ func (a *Application) promptRetry(spec *client.ChainlinkJobSpec) {
 
 func (a *Application) promptEdit(spec *client.ChainlinkJobSpec) error {
 	if answer, err := a.config.UI.Ask("Edit job spec parameters? [y/n]", &input.Options{
-		Default:  "n",
-		Loop:     true,
-		Required: true,
+		Default:      "n",
+		Loop:         true,
+		Required:     true,
 		ValidateFunc: booleanInputValidation,
 	}); err != nil {
 		return err
