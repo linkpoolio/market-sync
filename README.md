@@ -1,4 +1,5 @@
 # Market Sync
+
 Synchronise job specifications from any given Chainlink node to the [LinkPool Market](https://market.link):
 
 - Detects if there's job specifications on the provided Chainlink node that don't exist on the market.
@@ -12,13 +13,14 @@ Synchronise job specifications from any given Chainlink node to the [LinkPool Ma
 Download the latest version from [releases](https://github.com/linkpoolio/market-sync/releases).
 
 Alternatively, you can use the Docker container:
+
 ```
 docker pull linkpool/market-sync
 ```
 
 ## Usage
 
-Market sync is a simple CLI tool that requires you to provide your Chainlink node login credentials, and LinkPool Market 
+Market sync is a simple CLI tool that requires you to provide your Chainlink node login credentials, and LinkPool Market
 API keys.
 
 ### Preconditions
@@ -34,6 +36,7 @@ market-sync \
     -e admin@node.local \
     -p twochains \
     -u http://localhost:6688 \
+    -o 0xa00000000000000000000000000000000000000f \
     -a 31896afb-fa1c-4b30-b9a7-d7b5284cfab7 \
     -s RnscNLRnfWVRBuuRipWDRnscNLRnfWVRBuuRipWDRnscNLRnfWVRBuuRipWD
 ```
@@ -44,6 +47,7 @@ market-sync \
 CHAINLINK_EMAIL=admin@node.local; \
 CHAINLINK_PASSWORD=twochains; \
 CHAINLINK_URL=http://localhost:6688; \
+CHAINLINK_ORACLE_ADDRESS=0xa00000000000000000000000000000000000000f; \
 MARKET_ACCESS_KEY=31896afb-fa1c-4b30-b9a7-d7b5284cfab7; \
 MARKET_SECRET_KEY=RnscNLRnfWVRBuuRipWDRnscNLRnfWVRBuuRipWDRnscNLRnfWVRBuuRipWD; \
 market-sync
