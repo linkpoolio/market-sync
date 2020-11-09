@@ -22,13 +22,14 @@ type Application struct {
 }
 
 type Config struct {
-	UI                *input.UI
-	ChainlinkEmail    string
-	ChainlinkPassword string
-	ChainlinkURL      string
+	UI                      *input.UI
+	ChainlinkEmail          string
+	ChainlinkPassword       string
+	ChainlinkURL            string
+	ChainlinkOracleAddress	common.Address
 
-	MarketAccessKey string
-	MarketSecretKey string
+	MarketAccessKey         string
+	MarketSecretKey         string
 }
 
 func NewApplication(config *Config) (*Application, error) {
@@ -56,14 +57,13 @@ func NewApplication(config *Config) (*Application, error) {
 func (a *Application) MarketNode() (*client.MarketNode, error) {
 	yellow := color.New(color.FgYellow).SprintFunc()
 
-	oracleNilError := errors.New("Chainlink oracle address is nil, please ensure `ORACLE_CONTRACT_ADDRESS` is set in configuration")
+	oracleNilError := errors.New("Chainlink oracle address is nil, please ensure chainlink-oracle-address is being passed in as a flag.")
 	cfg, err := a.chainlink.Config()
 	if err != nil {
 		return nil, err
-	} else if cfg.Data.Attributes.OracleContractAddress == nil {
-		return nil, oracleNilError
 	}
-	oracle := cfg.Data.Attributes.OracleContractAddress
+
+	oracle := a.config.ChainlinkOracleAddress
 	chainId := cfg.Data.Attributes.ETHChainID
 
 	fmt.Printf("%s %s\n", yellow("Oracle Address:"), oracle.String())
@@ -71,7 +71,7 @@ func (a *Application) MarketNode() (*client.MarketNode, error) {
 		return nil, oracleNilError
 	}
 
-	node, err := a.market.NodeByOracleAddress(oracle, chainId)
+	node, err := a.market.NodeByOracleAddress(&oracle, chainId)
 	if err != nil {
 		return nil, errors.New("Chainlink node not found on the Market, create it before running this tool")
 	}
